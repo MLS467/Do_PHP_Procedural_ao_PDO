@@ -1,0 +1,21 @@
+CREATE DATABASE aula;
+
+CREATE DATABASE aula;
+
+CREATE TABLE pessoa(
+	codpessoa int AUTO_INCREMENT PRIMARY KEY,
+    nome varchar(50),
+    email varchar (100),
+    data_nasc varchar(10),
+    senha varchar(255)
+);
+
+CREATE TABLE produto(
+	codproduto int AUTO_INCREMENT PRIMARY KEY,
+    nome varchar(50),
+    descricao varchar(100),
+    imagem varchar(100)
+);
+
+insert into pessoa(nome,email,data_nasc,senha,imagem) VALUES ('Maisson','maisson@teste.com','1995-05-24','12345',null);
+
