@@ -16,56 +16,82 @@
     .input_erro {
         border: 1px solid red;
     }
+
+    form {
+        background-image: url(../img/o-astronauta-do-doodle-esta-pedalando-no-espaco_185029-1046.jpg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 300px;
+    }
+
+    body {
+        background-image: url(../img/1600w-lKp1cXK1ybY.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 600px;
+
+    }
+
+    button {
+
+        width: 40%;
+    }
     </style>
     <title>Document</title>
 </head>
 
 
-<body>
-    <div class="container">
-        <form style="height: 300px;"
-            class="w-100 mt-5 d-flex justify-content-start d-flex flex-column mb-3 d-flex align-items-start"
+<body class="d-flex justify-content-start align-items-start w-100">
+    <div id="caixa" class="containers w-75">
+        <div class="d-flex mt-5 ms-3 justify-content-start">
+            <h1><strong>Login</strong>
+            </h1><br>
+
+        </div>
+        <form
+            class="w-75  d-flex justify-content-end d-flex  mb-3 d-flex align-items-center border shadow p-3 mb-5 ms-3 bg-body-tertiary rounded"
             action="valida_login.php" method="POST">
+            <div class="container  d-flex justify-content-center  flex-column align-items-end">
 
-            <div class="row w-50 mb-3">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                    <?php
+                <div class="row w-50 mb-3 d-flex justify-content-center ">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10 w-50">
+                        <?php
 
-                    if (isset($_SESSION['erro2']) and $_SESSION['erro2'] == 'ok') { ?>
-                    <input type="email" class="form-control border-danger" name="email" id="inputEmail3">
-                    <?php } else { ?>
-                    <input type="email" class="form-control border-dark" name="email" id="inputEmail3">
-                    <?php } ?>
+                        if (isset($_SESSION['erro2']) and $_SESSION['erro2'] == 'ok') { ?>
+                        <input type="email" class="form-control border-danger" name="email" id="inputEmail3">
+                        <?php } else { ?>
+                        <input type="email" class="form-control border-dark" name="email" id="inputEmail3">
+                        <?php } ?>
+
+                    </div>
+                </div>
+                <div class="row mb-3 w-50 mb-3 d-flex justify-content-center">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label ">Senha</label>
+                    <div class="col-sm-10 w-50">
+                        <?php
+
+                        if (isset($_SESSION['erro2']) and $_SESSION['erro2'] == 'ok') { ?>
+                        <input type="password" name="senha" class="form-control border-danger" id="inputPassword3">
+                        <?php } else { ?>
+                        <input type="password" name="senha" class="form-control border-dark" id="inputPassword3">
+                        <?php } ?>
+                    </div>
+                </div><br><br>
+                <?php
+
+                if (isset($_SESSION['msg'])) {
+                    echo $_SESSION['msg'];
+                    session_unset();
+                }
+                ?> <div class="w-50 text-end">
+                    <button type="submit" name="Login" class="btn btn-dark px-5 ">Entrar</button>
+
+                    <button type="reset" class="btn btn-dark ">Limpar</button>
 
                 </div>
-            </div>
-            <div class="row mb-3 w-50 mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label ">Senha</label>
-                <div class="col-sm-10">
-                    <?php
-
-                    if (isset($_SESSION['erro2']) and $_SESSION['erro2'] == 'ok') { ?>
-                    <input type="password" name="senha" class="form-control border-danger" id="inputPassword3">
-                    <?php } else { ?>
-                    <input type="password" name="senha" class="form-control border-dark" id="inputPassword3">
-                    <?php } ?>
-                </div>
-            </div><br><br>
-            <?php
-
-            if (isset($_SESSION['msg'])) {
-                echo $_SESSION['msg'];
-                session_unset();
-            }
-            ?> <div class="w-100 text-start">
-                <button type="submit" name="Login" class="btn btn-dark px-5">Entrar</button>
-
-                <button type="reset" class="btn btn-dark px-5">Limpar</button>
 
             </div>
-
-
         </form>
 
     </div>
