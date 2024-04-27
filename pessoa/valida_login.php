@@ -19,7 +19,9 @@ if (isset($_POST['Login'])) {
             $_SESSION['email'] = $email;
             header("location:nav.php");
         } else {
-            $_SESSION['msg'] = '<p class="erro">Login inválido, tente novamente!</p>';
+            $_SESSION['msg'] = '<div class="alert alert-danger w-75 ms-3" role="alert">
+            Login inválido, tente novamente!
+          </div>>';
             $_SESSION['erro2'] = 'ok';
             header("location:index.php");
         }

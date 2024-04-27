@@ -11,6 +11,17 @@
     <style>
     .erro {
         color: red;
+        font-size: 10px;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    #erroDiv {
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: start;
+        align-items: center;
     }
 
     .input_erro {
@@ -28,13 +39,14 @@
         background-image: url(../img/1600w-lKp1cXK1ybY.webp);
         background-repeat: no-repeat;
         background-size: cover;
-        height: 600px;
+        height: 450px;
 
     }
 
     button {
-
-        width: 40%;
+        margin-right: 5px;
+        width: 75%;
+        margin-bottom: 5px;
     }
     </style>
     <title>Document</title>
@@ -53,7 +65,7 @@
             action="valida_login.php" method="POST">
             <div class="container  d-flex justify-content-center  flex-column align-items-end">
 
-                <div class="row w-50 mb-3 d-flex justify-content-center ">
+                <div class="row w-75 mb-3 d-flex justify-content-center ">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10 w-50">
                         <?php
@@ -66,11 +78,10 @@
 
                     </div>
                 </div>
-                <div class="row mb-3 w-50 mb-3 d-flex justify-content-center">
+                <div class="row mb-3 w-75 mb-3 d-flex justify-content-center">
                     <label for="inputPassword3" class="col-sm-2 col-form-label ">Senha</label>
                     <div class="col-sm-10 w-50">
                         <?php
-
                         if (isset($_SESSION['erro2']) and $_SESSION['erro2'] == 'ok') { ?>
                         <input type="password" name="senha" class="form-control border-danger" id="inputPassword3">
                         <?php } else { ?>
@@ -78,21 +89,25 @@
                         <?php } ?>
                     </div>
                 </div><br><br>
-                <?php
 
-                if (isset($_SESSION['msg'])) {
-                    echo $_SESSION['msg'];
-                    session_unset();
-                }
-                ?> <div class="w-50 text-end">
-                    <button type="submit" name="Login" class="btn btn-dark px-5 ">Entrar</button>
+                <div>
+                    <button type="submit" name="Login" class="btn btn-dark px-5 text-center">Entrar</button>
 
-                    <button type="reset" class="btn btn-dark ">Limpar</button>
+                    <button type="reset" class="btn btn-dark px-5 text-center">Limpar</button>
 
                 </div>
 
             </div>
         </form>
+        <div id="erroDiv">
+            <?php
+
+            if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                session_unset();
+            }
+            ?>
+        </div>
 
     </div>
 
