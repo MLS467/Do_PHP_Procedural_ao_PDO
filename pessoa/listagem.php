@@ -1,13 +1,11 @@
 <?php
-include "conecta.php";
+require_once('../class/config.php');
+require_once('../autoload.php');
 
-
-$sql = $pdo->prepare("SELECT * FROM pessoa ORDER BY nome");
-$sql->execute();
-
-while ($dados = $sql->fetch()) {
+$pessoa = new Pessoa();
+$res = $pessoa->selecionarTodosRegistros();
+foreach ($res as $key => $dados) {
     $imagem = $dados['imagem'];
-
 ?>
 
 
@@ -18,7 +16,7 @@ while ($dados = $sql->fetch()) {
         <img style="width:100px; height:120px; margin-bottom: 3%;" src='<?php echo "../img/$imagem" ?>' alt=" foto da
             pessoa">
 
-        <input type="hidden" name="codpessoa" value="<?php echo $dados['codpessoa'] ?>">
+        <input type="hidden" name="id" value="<?php echo $dados['id'] ?>">
 
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" value="<?php echo $dados['nome'] ?>">

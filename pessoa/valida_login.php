@@ -1,4 +1,7 @@
 <?php
+require_once('../class/config.php');
+require_once('../autoload.php');
+
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -8,13 +11,10 @@ $senha_cript = sha1($senha);
 if (isset($_POST['Login'])) {
 
     if (!((empty($mail)) && (empty($senha)))) {
-        include "conecta.php";
 
-        $sql = $pdo->prepare("SELECT * FROM pessoa WHERE email=? and senha=?");
-        $sql->execute(array($email, $senha_cript));
-        $res = $sql->fetchAll();
+        $pessoa = new Pessoa();
 
-        if (count($res) == 1) {
+        if ($pessoa->selecionarLogin($email, $senha_cript)) {
             $_SESSION['logado'] = true;
             $_SESSION['email'] = $email;
             header("location:nav.php");

@@ -1,4 +1,5 @@
 <?php
+require_once('')
 include  "./pessoa/conecta.php";
 include "./pessoa/valida_arquivo.php";
 include "valida_form_prod.php";
@@ -11,8 +12,10 @@ $tmp = $_FILES['pic_prod']['tmp_name'];
 if (validaFormProd($nome, $desc)) {
     if (ValidaArq($img, $_FILES['pic_prod']['size'])) {
         move_uploaded_file($tmp, "img/" . $img);
-        $inserir = $pdo->prepare("INSERT INTO produto(nome,descricao,imagem) VALUES (?,?,?)");
-        $inserir->execute(array($nome, $desc, $img));
+        // $inserir = $pdo->prepare("INSERT INTO produto(nome,descricao,imagem) VALUES (?,?,?)");
+        // $inserir->execute(array($nome, $desc, $img));
+        // $pessoa = new 
+
 
         if ($inserir) {
             echo 'Dados inseridos com sussesso!';

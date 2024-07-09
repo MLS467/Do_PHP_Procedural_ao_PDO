@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['enviar'])) {
-    include "conecta.php";
+    require_once('../class/Pessoa.php');
     include "valida_arquivo.php";
     include "valida_form.php";
 
@@ -14,19 +14,13 @@ if (isset($_POST['enviar'])) {
     $senha = $_POST['senha'];
     $senha_cript = sha1($_POST['senha']);
 
-
-
-
     if (validaForm($nome, $email, $senha)) {
 
         if (ValidaArq($_FILES['picture']['name'], $_FILES['picture']['size'])) {
             move_uploaded_file($tmp, $path . $nomeImg);
+            $pessoa = new Pessoa($nome, $email, $data, $senha_cript, $nomeImg);
 
-            $sql = $pdo->prepare("INSERT INTO pessoa(nome,email,data_nasc,senha,imagem) VALUES (?,?,?,?,?)");
-
-            $sql->execute(array($nome, $email, $data, $senha_cript, $nomeImg));
-
-            if ($sql) {
+            if ($pessoa->inserirDados()) {
                 echo "INSERÇÃO REALIZADA COM SUSSESSO!";
             } else {
                 echo "HOUVE UM PROBLEMA PARA ARMAZENAR OS DADOS!";
