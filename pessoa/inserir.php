@@ -1,8 +1,7 @@
 <?php
 if (isset($_POST['enviar'])) {
-    require_once('../class/Pessoa.php');
-    include "valida_arquivo.php";
-    include "valida_form.php";
+    require_once('../class/config.php');
+    require_once('../autoload.php');
 
     $nomeImg =  $_FILES['picture']['name'];
     $tmp = $_FILES['picture']['tmp_name'];
@@ -14,20 +13,19 @@ if (isset($_POST['enviar'])) {
     $senha = $_POST['senha'];
     $senha_cript = sha1($_POST['senha']);
 
-    if (validaForm($nome, $email, $senha)) {
+    $validar = new Validacao();
 
-        if (ValidaArq($_FILES['picture']['name'], $_FILES['picture']['size'])) {
-            move_uploaded_file($tmp, $path . $nomeImg);
-            $pessoa = new Pessoa($nome, $email, $data, $senha_cript, $nomeImg);
+    if ($validar->ValidaArq($_FILES['picture']['name'], $_FILES['picture']['size'])) {
 
-            if ($pessoa->inserirDados()) {
-                echo "INSERÇÃO REALIZADA COM SUSSESSO!";
-            } else {
-                echo "HOUVE UM PROBLEMA PARA ARMAZENAR OS DADOS!";
-            }
+        move_uploaded_file($tmp, $path . $nomeImg);
+
+        $pessoa = new Pessoa($nome, $email, $data, $senha_cript, $nomeImg);
+
+        if ($pessoa->inserirDados()) {
+            echo "INSERÇÃO REALIZADA COM SUSSESSO!";
+        } else {
+            echo "HOUVE UM PROBLEMA PARA ARMAZENAR OS DADOS!";
         }
-    } else {
-        echo "<br><br>HOUVE UM PROBLEMA PARA ARMAZENAR OS DADOS!";
     }
 }
 ?>

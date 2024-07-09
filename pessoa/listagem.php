@@ -30,6 +30,7 @@ foreach ($res as $key => $dados) {
         <label for="senha">Senha :</label>
         <input type="text" name="senha" value="<?php echo $dados['senha'] ?>" id="senha" required>
         <div style="margin-top: 3%;"> <input type="file" name="img" id="img">
+
             <br><br><br>
             <button type="submit" name="editar">Editar</button>
             <button type="submit" name="excluir">Excluir</button>

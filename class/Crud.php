@@ -11,7 +11,7 @@ abstract class Crud extends Db
 
     public function selecionarTodosRegistros()
     {
-        $sql = "SELECT * FROM $this->nomeTabela";
+        $sql = "SELECT * FROM $this->nomeTabela ORDER BY nome";
         $query = self::preparar($sql);
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -20,7 +20,7 @@ abstract class Crud extends Db
 
     public function selecionarUmRegistro($id)
     {
-        $sql = 'SELECT * FROM $this->nomeTabela WHERE id = ?';
+        $sql = "SELECT * FROM $this->nomeTabela WHERE id = ?";
         $query = self::preparar($sql);
         $query->execute(array($id));
         $res = $query->fetch();
@@ -28,14 +28,37 @@ abstract class Crud extends Db
         return $res;
     }
 
+    public function selecionarUmRegistroPorEmail($email)
+    {
+        $sql = "SELECT * FROM $this->nomeTabela WHERE email = ?";
+        $query = self::preparar($sql);
+        $query->execute(array($email));
+        $res = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $res;
+    }
+
+
     public function deletarUmRegistro($id)
     {
         $sql = "DELETE FROM $this->nomeTabela WHERE id = ?";
         $query = self::preparar($sql);
         $query->execute(array($id));
         if (!$query)
-            return 0;
+            return false;
 
-        return 1;
+        return true;
+    }
+
+
+
+    public function selecionarParaPesquisa($pesquisa)
+    {
+        $sql = "SELECT * FROM $this->nomeTabela WHERE nome LIKE ?";
+        $pesquisarNome = "%$pesquisa%";
+        $query = Db::preparar($sql);
+        $query->execute(array($pesquisarNome));
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
     }
 }

@@ -43,7 +43,7 @@ if ((!isset($_SESSION['email'])) or (!$_SESSION['logado'])) {
                                         usuário</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../cad_prod.php">Cadastrar produto</a>
+                                    <a class="nav-link" href="../produto/cad_prod.php">Cadastrar produto</a>
                                 </li>
                                 <li class="nav-item">
 
@@ -52,7 +52,7 @@ if ((!isset($_SESSION['email'])) or (!$_SESSION['logado'])) {
                                     <a class="nav-link" href="listagem.php">Listagem de usuário</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../Listagem_prod.php">Listagem de produto</a>
+                                    <a class="nav-link" href="../produto/Listagem_prod.php">Listagem de produto</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="editar_adm.php">Editar admin</a>
@@ -72,11 +72,11 @@ if ((!isset($_SESSION['email'])) or (!$_SESSION['logado'])) {
                                 </li>
                             </ul>
                             <form class="d-flex mt-3" action="cod_pesq.php" method="POST">
-                                <input class="form-control me-2" name="pesquisa" type="search"
+                                <input class="form-control me-2" name="usuario" type="search"
                                     placeholder="Pesquisar usuário" aria-label="Search">
                                 <button class="btn btn-success" type="submit">Buscar</button>
                             </form>
-                            <form class="d-flex mt-3" action="../cod_pes_prod.php" method="POST">
+                            <form class="d-flex mt-3" action="../produto/cod_pes_prod.php" method="POST">
                                 <input class="form-control me-2" name="produto" type="search"
                                     placeholder="Pesquisar produto" aria-label="Search">
                                 <button class="btn btn-success" type="submit">Buscar</button>

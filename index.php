@@ -67,7 +67,7 @@
         </div>
         <form
             class="w-75  d-flex justify-content-end d-flex  mb-3 d-flex align-items-center border shadow p-3 mb-5 ms-3 bg-body-tertiary rounded"
-            action="valida_login.php" method="POST">
+            action="pessoa/valida_login.php" method="POST">
             <div class="container  d-flex justify-content-center  flex-column align-items-end">
 
                 <div class="row w-75 mb-3 d-flex justify-content-center ">

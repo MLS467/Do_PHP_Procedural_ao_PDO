@@ -3,18 +3,17 @@ require_once('../class/config.php');
 require_once('../autoload.php');
 
 
-$email = $_POST['email'];
-$senha = $_POST['senha'];
-$senha_cript = sha1($senha);
-
-
 if (isset($_POST['Login'])) {
+
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $senha_cript = sha1($senha);
 
     if (!((empty($mail)) && (empty($senha)))) {
 
-        $pessoa = new Pessoa();
+        $Login = new Login($email, $senha_cript, $senha);
 
-        if ($pessoa->selecionarLogin($email, $senha_cript)) {
+        if ($Login->selecionarLogin()) {
             $_SESSION['logado'] = true;
             $_SESSION['email'] = $email;
             header("location:nav.php");
@@ -23,11 +22,11 @@ if (isset($_POST['Login'])) {
             Login inválido, tente novamente!
           </div>>';
             $_SESSION['erro2'] = 'ok';
-            header("location:index.php");
+            header("location:../index.php");
         }
     } else {
         $_SESSION['erro2'] = 'ok';
         $_SESSION['msg'] = '<p class="erro">Preencha todos os campos!</p>';
-        header("location:index.php");
+        header("location:../index.php");
     }
 }

@@ -1,10 +1,10 @@
 <?php
-include "conecta.php";
-$email = $_SESSION['email'];
-$select = $pdo->prepare("SELECT * FROM pessoa WHERE email=?");
-$select->execute(array($email));
+require_once('../autoload.php');
+require_once('../class/config.php');
 
-$dados = $select->fetch();
+$email = $_SESSION['email'];
+$admin = new Pessoa();
+$dados = $admin->selecionarUmRegistroPorEmail($email);
 
 $imagem = $dados['imagem'];
 
@@ -18,7 +18,7 @@ $imagem = $dados['imagem'];
         <img style="width:100px; height:120px; margin-bottom: 3%;" src='<?php echo "../img/$imagem" ?>' alt=" foto da
             pessoa">
 
-        <input type="hidden" name="codpessoa" value="<?php echo $dados['codpessoa'] ?>">
+        <input type="hidden" name="id" value="<?php echo $dados['id'] ?>">
 
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" value="<?php echo $dados['nome'] ?>">

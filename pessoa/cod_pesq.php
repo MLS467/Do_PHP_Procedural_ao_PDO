@@ -1,15 +1,15 @@
 <?php
-include "conecta.php";
+require_once('../class/config.php');
+require_once('../class/Pessoa.php');
 
 
-$nome = $_POST['pesquisa'];
+$nome = $_POST['usuario'];
 
 
-$select = $pdo->prepare('SELECT * FROM pessoa WHERE nome LIKE "%"?"%"');
-$select->execute(array($nome));
+$pessoa = new Pessoa();
+$res = $pessoa->selecionarParaPesquisa($nome);
 
-
-while ($dados = $select->fetch()) {
+foreach ($res as $dados) {
 ?>
 <label for="res">Usuario :</label>
 <input style="width:800px" id="res" type="text"

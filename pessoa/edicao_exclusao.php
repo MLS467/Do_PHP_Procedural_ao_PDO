@@ -1,7 +1,6 @@
 <?php
-require_once('instanciar.php');
-include "valida_arquivo.php";
-include "valida_form.php";
+require_once('../autoload.php');
+require_once('../class/config.php');
 
 $img = $_FILES['img']['name'];
 $img_tmp = $_FILES['img']['tmp_name'];
@@ -14,23 +13,25 @@ $data = $_POST['data'];
 $senha = $_POST['senha'];
 
 if (isset($_POST['excluir'])) {
+    $pessoa = new Pessoa();
     if ($pessoa->deletarUmRegistro($id)) {
         echo "EXCLUSÃO REALIZADA COM SUSSESSO!";
     }
 } else {
     if (isset($_POST['editar'])) {
+        $validar = new Validacao();
         $path = "../img/";
-        if (validaForm($nome, $email, $senha)) {
-            if (ValidaArq($img, $img_tam)) {
 
-                $senha_cript = sha1($senha);
+        if ($validar->ValidaArq($img, $img_tam)) {
 
-                move_uploaded_file($img_tmp, $path . $img);
+            $senha_cript = sha1($senha);
 
-                $pessoa = new Pessoa($nome, $email, $data, $senha, $img);
-                if ($pessoa->atualizarDados($id)) {
-                    echo "EDIÇÃO REALIZADA COM SUSSESSO!";
-                }
+            move_uploaded_file($img_tmp, $path . $img);
+
+            $pessoa = new Pessoa($nome, $email, $data, $senha, $img);
+
+            if ($pessoa->atualizarDados($id)) {
+                echo "EDIÇÃO REALIZADA COM SUSSESSO!";
             }
         }
     }
@@ -38,4 +39,4 @@ if (isset($_POST['excluir'])) {
 
 ?>
 <br><br><br>
-<a href="listagem.php">Voltar</a><br>
+<a href="nav.php">Voltar</a><br>

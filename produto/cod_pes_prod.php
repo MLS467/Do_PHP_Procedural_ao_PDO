@@ -1,13 +1,13 @@
 <?php
-include "pessoa/conecta.php";
+require_once('../autoload.php');
+require_once('../class/Produto.php');
 
 $nome = $_POST['produto'];
 
+$pesquisarProdutos = new Produto();
+$res = $pesquisarProdutos->selecionarParaPesquisa($nome);
 
-$sql = $pdo->prepare('SELECT * FROM produto WHERE nome LIKE "%"?"%"');
-$sql->execute(array($nome));
-
-while ($dados = $sql->fetch()) {
+foreach ($res as $dados) {
 
 ?>
 
