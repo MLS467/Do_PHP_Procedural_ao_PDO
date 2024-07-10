@@ -22,7 +22,13 @@ if (isset($_POST['editar'])) {
     if ($produto->deletarUmRegistro($id)) {
         echo "Excluído feita com sucesso!";
     }
-} ?>
+} else if (isset($_POST['addCarrinho'])) {
+    $_SESSION['idProd'] = $_POST['id'];
+    $_SESSION['quantidade'] = $_POST['quantidade'];
+    header('location:../pessoa/config_carrinho.php');
+}
+
+?>
 <br><br><br>
 <a href="./Listagem_prod.php">Voltar</a>
 

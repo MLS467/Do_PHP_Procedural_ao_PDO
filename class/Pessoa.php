@@ -79,4 +79,64 @@ class Pessoa extends Crud
             return 0;
         }
     }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function getDataNasc()
+    {
+        return $this->data_nasc;
+    }
+
+    public function setDataNasc($data_nasc)
+    {
+        $this->data_nasc = $data_nasc;
+    }
+
+    public function getSenha()
+    {
+        return $this->senha;
+    }
+
+    public function setSenha($senha)
+    {
+        $this->senha = $senha;
+    }
+
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
+
+    public function setImagem($imagem)
+    {
+        $this->imagem = $imagem;
+    }
+
+    public function getValidar()
+    {
+        return $this->validar;
+    }
+
+    public function setValidar(?Validacao $validar)
+    {
+        $this->validar = $validar;
+    }
 }

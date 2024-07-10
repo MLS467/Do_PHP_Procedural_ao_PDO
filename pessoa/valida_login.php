@@ -12,8 +12,9 @@ if (isset($_POST['Login'])) {
     if (!((empty($mail)) && (empty($senha)))) {
 
         $Login = new Login($email, $senha_cript, $senha);
-
-        if ($Login->selecionarLogin()) {
+        $user = $Login->selecionarLogin();
+        if ($user) {
+            $_SESSION['id'] = $user['id'];
             $_SESSION['logado'] = true;
             $_SESSION['email'] = $email;
             header("location:nav.php");

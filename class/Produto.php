@@ -57,4 +57,64 @@ class Produto extends Crud
                 return false;
         }
     }
+
+    public function getNomeTabela()
+    {
+        return $this->nomeTabela;
+    }
+
+    public function setNomeTabela($nomeTabela)
+    {
+        $this->nomeTabela = $nomeTabela;
+    }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
+
+    public function setImagem($imagem)
+    {
+        $this->imagem = $imagem;
+    }
+
+    public function getValor()
+    {
+        return $this->valor;
+    }
+
+    public function setValor($valor)
+    {
+        $this->valor = $valor;
+    }
+
+    public function getValidar()
+    {
+        return $this->validar;
+    }
+
+    public function setValidar(?Validacao $validar)
+    {
+        $this->validar = $validar;
+    }
 }

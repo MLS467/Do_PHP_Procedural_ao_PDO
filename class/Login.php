@@ -22,10 +22,10 @@ class Login extends Db
             $sql = "SELECT * FROM $this->nomeTabela WHERE email = ? AND senha = ?";
             $query = self::preparar($sql);
             $query->execute(array($this->email, $this->senhaCript));
-            $res = $query->fetch();
+            $res = $query->fetch(PDO::FETCH_ASSOC);
             if (!$res)
                 return false;
-            return true;
+            return $res;
         } else {
             return false;
         }

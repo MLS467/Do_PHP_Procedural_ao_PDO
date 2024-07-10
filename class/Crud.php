@@ -23,7 +23,7 @@ abstract class Crud extends Db
         $sql = "SELECT * FROM $this->nomeTabela WHERE id = ?";
         $query = self::preparar($sql);
         $query->execute(array($id));
-        $res = $query->fetch();
+        $res = $query->fetch(PDO::FETCH_ASSOC);
 
         return $res;
     }
