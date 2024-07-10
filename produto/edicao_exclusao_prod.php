@@ -13,7 +13,7 @@ if (isset($_POST['editar'])) {
     $produto = new Produto($nome, $descricao, null, $valor);
 
     if ($produto->atualizarDados($id)) {
-        echo "Atualização feita com sucesso!";
+        header('location:Listagem_prod.php');
     }
 } else if (isset($_POST['excluir'])) {
 
@@ -21,6 +21,7 @@ if (isset($_POST['editar'])) {
 
     if ($produto->deletarUmRegistro($id)) {
         echo "Excluído feita com sucesso!";
+        header('location:Listagem_prod.php');
     }
 } else if (isset($_POST['addCarrinho'])) {
     $_SESSION['idProd'] = $_POST['id'];

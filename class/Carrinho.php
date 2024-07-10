@@ -27,23 +27,18 @@ class Carrinho
         if (!$query) {
             return false;
         }
-        echo "INSERIDO COM SUCESSO!";
     }
 
 
     public function mostrarItensCarrinho()
     {
-        $sql = "SELECT DISTINCT(nome_prod) FROM $this->nomeTabela ORDER BY nome_prod";
+        $sql = "SELECT * FROM $this->nomeTabela ORDER BY nome_prod";
         $query = Db::preparar($sql);
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo "<pre>";
-        print_r($res);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($this->somarValores());
-        echo "</pre>";
-        $this->contagemDeItens();
+        // print_r($this->somarValores());
+        // $this->contagemDeItens();
+        return $res;
     }
 
 

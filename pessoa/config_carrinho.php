@@ -15,5 +15,8 @@ $novoProduto = $produto->selecionarUmRegistro($idProduto);
 
 $carrinho = new Carrinho($novaPessoa);
 $carrinho->AdicionarParaCarrinho($novoProduto, $qtd);
-// $carrinho->mostrarItensCarrinho();
-header('location:../produto/listagem_prod.php');
+
+
+$retornaJson = $carrinho->mostrarItensCarrinho();
+header('Content-Type: application/json');
+echo json_encode(['itens' => $retornaJson]);
