@@ -11,22 +11,33 @@ class Carrinho
     private ?array $pessoa = null;
     private ?int $id = null;
 
-    public function __construct($pessoa)
+    public function __construct(array $pessoa)
     {
         $this->nomeTabela = 'carrinho';
         $this->pessoa = $pessoa;
     }
 
-    public function AdicionarParaCarrinho(array $produto, $qtd)
+    public function AdicionarParaCarrinho(array $produto, int $qtd)
     {
 
-        $sql = "INSERT INTO $this->nomeTabela VALUES (null,?,?,?,?,?,?)";
+        $sql = "INSERT INTO $this->nomeTabela VALUES (null,?,?,?,?,?,?,?)";
         $query = Db::preparar($sql);
-        $query->execute(array($produto['nome'], $qtd, $produto['valor'], $produto['valor'] * $qtd, $this->pessoa['nome'], $this->pessoa['id']));
+        $query->execute(array($produto['nome'], $qtd, $produto['valor'], ($produto['valor'] * $qtd), $this->getPessoa()['nome'], $this->getPessoa()['id'], $produto['imagem']));
 
         if (!$query) {
             return false;
         }
+    }
+
+    public function deletarItemDoCarrinho($id)
+    {
+        $sql = "DELETE FROM $this->nomeTabela WHERE id = ?";
+        $query = Db::preparar($sql);
+        $query->execute(array($id));
+        if (!$query)
+            return false;
+
+        return true;
     }
 
 
@@ -36,31 +47,61 @@ class Carrinho
         $query = Db::preparar($sql);
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        // print_r($this->somarValores());
-        // $this->contagemDeItens();
+
         return $res;
     }
 
 
-    private function somarValores()
+    public function somarValores()
     {
         $sql = "SELECT SUM(valor_total) as soma FROM $this->nomeTabela WHERE id_usuario=?";
         $query = Db::preparar($sql);
-        $query->execute(array($this->pessoa['id']));
+        $query->execute(array($this->getPessoa()['id']));
         $res = $query->fetch(PDO::FETCH_ASSOC);
-        $valorTotal = number_format($res['soma'], 2, '.', '');
-        return $valorTotal;
+
+        return $res;
     }
 
-    private function contagemDeItens()
+    public function contagemDeItens()
     {
         $sql = "SELECT SUM(qtd_prod) as contagem FROM $this->nomeTabela WHERE id_usuario=?";
         $query = Db::preparar($sql);
-        $query->execute(array($this->pessoa['id']));
+        $query->execute(array($this->getPessoa()['id']));
         $res = $query->fetch(PDO::FETCH_ASSOC);
-        echo "<pre>";
-        print_r($res['contagem']);
-        echo "</pre>";
-        // return $res['contagem'];
+        return $res;
+    }
+
+    public function getNomeTabela(): ?string
+    {
+        return $this->nomeTabela;
+    }
+
+
+    public function setNomeTabela(?string $nomeTabela): void
+    {
+        $this->nomeTabela = $nomeTabela;
+    }
+
+
+    public function getPessoa(): ?array
+    {
+        return $this->pessoa;
+    }
+
+
+    public function setPessoa(?array $pessoa): void
+    {
+        $this->pessoa = $pessoa;
+        $this->setId($this->getPessoa()['id']);
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 }

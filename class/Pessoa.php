@@ -20,22 +20,22 @@ class Pessoa extends Crud
         $this->data_nasc = $data_nasc;
         $this->senha = $senha;
         $this->imagem = $imagem;
-        $this->validar = new Validacao;
+        $this->validar = new Validacao();
     }
 
     function inserirDados()
     {
-        if ($this->validar->validaForm($this->nome, $this->email, $this->senha)) {
+        if ($this->getValidar()->validaForm($this->getNome(), $this->getEmail(), $this->getSenha())) {
 
             $sql = "INSERT INTO $this->nomeTabela VALUES  (null,?,?,?,?,?)";
             $query = Db::preparar($sql);
             $query->execute(
                 array(
-                    $this->nome,
-                    $this->email,
-                    $this->data_nasc,
-                    $this->senha,
-                    $this->imagem
+                    $this->getNome(),
+                    $this->getEmail(),
+                    $this->getDataNasc(),
+                    $this->getSenha(),
+                    $this->getImagem(),
                 )
             );
 
@@ -49,25 +49,16 @@ class Pessoa extends Crud
 
     function atualizarDados($id)
     {
-        if ($this->validar->validaForm($this->nome, $this->email, $this->senha)) {
-
-
-            $sql = "UPDATE $this->nomeTabela SET 
-        nome=?,
-        email =?,
-        data_nasc=?,
-        senha = ?,
-        imagem = ?
-        WHERE id = ? 
-        ";
+        if ($this->getValidar()->validaForm($this->getNome(), $this->getEmail(), $this->getSenha())) {
+            $sql = "UPDATE $this->nomeTabela SET nome=?,email =?,data_nasc=?,senha = ?,imagem = ? WHERE id = ? ";
             $query = self::preparar($sql);
             $query->execute(
                 [
-                    $this->nome,
-                    $this->email,
-                    $this->data_nasc,
-                    $this->senha,
-                    $this->imagem,
+                    $this->getNome(),
+                    $this->getEmail(),
+                    $this->getDataNasc(),
+                    $this->getSenha(),
+                    $this->getImagem(),
                     $id
                 ]
             );

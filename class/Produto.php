@@ -22,7 +22,7 @@ class Produto extends Crud
 
     public function inserirDados()
     {
-        if ($this->validar->validarProd($this->nome, $this->descricao, $this->valor)) {
+        if ($this->validar->validarProd($this->getNome(), $this->getDescricao(), $this->getValor())) {
 
             $sql = "INSERT INTO $this->nomeTabela VALUES  (null,?,?,?,?)";
             $query = Db::preparar($sql);
@@ -46,11 +46,11 @@ class Produto extends Crud
 
     public function atualizarDados($id)
     {
-        if ($this->validar->validarProd($this->nome, $this->descricao, $this->valor)) {
+        if ($this->getValidar()->validarProd($this->getNome(), $this->getDescricao(), $this->getValor())) {
 
             $sql = "UPDATE $this->nomeTabela SET nome=?,descricao =?,imagem =?, valor=? WHERE id = ?";
             $query = Db::preparar($sql);
-            $query->execute(array($this->nome, $this->descricao, $this->imagem, $this->valor, $id));
+            $query->execute(array($this->getNome(), $this->getDescricao(), $this->getImagem(), $this->getValor(), $id));
             if ($query)
                 return true;
             else

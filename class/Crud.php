@@ -24,7 +24,6 @@ abstract class Crud extends Db
         $query = self::preparar($sql);
         $query->execute(array($id));
         $res = $query->fetch(PDO::FETCH_ASSOC);
-
         return $res;
     }
 
